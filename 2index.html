@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Presentes - Casamento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding:  20px;
+    }
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+    .controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .presentes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .item {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .item h3 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+      color: #333;
+    }
+    .item p {
+      margin: 5px 0;
+      color: #666;
+    }
+    .item a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .item a:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Presentes - Casamento</h1>
+  <p style="text-align:center">Para presentear, clique em um item e copie a chave PIX: <strong>45769906839</strong></p>
+
+  <div class="controls">
+    <label for="sort">Ordenar por preço:</label>
+    <select id="sort" onchange="ordenarPorPreco()">
+      <option value="desc">Maior para menor</option>
+      <option value="asc">Menor para maior</option>
+    </select>
+  </div>
+
+  <div class="presentes" id="listaPresentes"></div>
+
+  <script>
+    const container = document.getElementById('listaPresentes');
+    const nomesPresentes = [
+      "Conjunto de Toalhas", "Faqueiro Inox", "Batedeira Planetária", "Jogo de Cama Queen", "Liquidificador",
+      "Ventilador", "Jogo de Panelas", "Aparelho de Jantar", "Cafeteira Elétrica", "Torradeira",
+      "Churrasqueira Elétrica", "Ferro de Passar", "Aspirador de Pó", "Cesta de Café Romântica", "Kit Banheiro",
+      "Caixa de Ferramentas", "Frigideira Antiaderente", "Bandeja de Servir", "Jogo de Taças", "Abajur Moderno",
+      "Ar Condicionado Split", "Televisor Smart 50\"", "Notebook Básico", "Máquina de Lavar",
+      "Forno Elétrico", "Micro-ondas", "Purificador de Água", "Mesa de Jantar", "Poltrona Decorativa", "Cadeira Gamer"
+    ];
+
+    const imagens = [
+      "https://images.unsplash.com/photo-1606813902750-0726dfb56e18",
+      "https://images.unsplash.com/photo-1606813902750-c6f5670b5b6a",
+      "https://images.unsplash.com/photo-1603993097397-89d2bb894e51",
+      "https://images.unsplash.com/photo-1606813902591-cb184a3a0a80",
+      "https://images.unsplash.com/photo-1620138405126-85dfb6ff0cfb",
+      "https://images.unsplash.com/photo-1567016545559-9adbbfdbd2b6",
+      "https://images.unsplash.com/photo-1616627987251-6603d78d7463",
+      "https://images.unsplash.com/photo-1573883430041-e21ef41a0d7d",
+      "https://images.unsplash.com/photo-1606813902750-25ea57f8dcb3",
+      "https://images.unsplash.com/photo-1616627749175-23980c81de36"
+    ];
+
+    let presentes = [];
+
+    for (let i = 1; i <= 300; i++) {
+      const nome = nomesPresentes[i % nomesPresentes.length] + " " + i;
+      const valor = Number((Math.random() * (3000 - 70) + 70).toFixed(2));
+      const imagem = imagens[i % imagens.length] + '?w=200&h=150&fit=crop';
+
+      presentes.push({
+        id: i,
+        nome,
+        valor,
+        imagem
+      });
+    }
+
+    function renderizarPresentes(lista) {
+      container.innerHTML = '';
+      lista.forEach(presente => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <img src="${presente.imagem}" alt="${presente.nome}">
+          <h3>${presente.nome}</h3>
+          <p>R$ ${presente.valor.toFixed(2).replace('.', ',')}</p>
+          <a href="#" onclick="copiarPIX()">Presentear</a>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function ordenarPorPreco() {
+      const ordem = document.getElementById('sort').value;
+      const listaOrdenada = [...presentes].sort((a, b) => ordem === 'asc' ? a.valor - b.valor : b.valor - a.valor);
+      renderizarPresentes(listaOrdenada);
+    }
+
+    function copiarPIX() {
+      const chave = '45769906839';
+      navigator.clipboard.writeText(chave)
+        .then(() => alert('Chave PIX copiada: ' + chave))
+        .catch(() => alert('Erro ao copiar a chave PIX.'));
+    }
+
+    ordenarPorPreco();
+  </script>
+</body>
+</html>
