@@ -1,2 +1,2 @@
-# ista-presentes-casamento
-Lista de Presentes
+# lista-presentes
+Lista de presentes virtuais com QR Code PIX

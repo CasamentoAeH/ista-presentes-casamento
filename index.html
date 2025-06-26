@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Presentes - Casamento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+    .presentes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .item {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .item img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .item h3 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+      color: #333;
+    }
+    .item p {
+      margin: 5px 0;
+      color: #666;
+    }
+    .item a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .item a:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Presentes - Casamento</h1>
+  <p style="text-align:center">Para presentear, clique em um item e copie a chave PIX: <strong>45769906839</strong></p>
+  <div class="presentes">
+    <!-- ITENS GERADOS AUTOMATICAMENTE -->
+    <!-- 300 itens com nomes, imagens e preços -->
+    
+    <!-- INÍCIO DOS PRESENTES -->
+    
+    <!-- Os itens abaixo são gerados dinamicamente -->
+    
+    <!-- Template: <div class="item">
+                  <img src="https://source.unsplash.com/200x150/?gift,X" alt="Presente X">
+                  <h3>Nome do Presente</h3>
+                  <p>R$ Valor</p>
+                  <a href="#" onclick="copiarPIX()">Presentear</a>
+                </div> -->
+
+    
+    <!-- GERADO AUTOMATICAMENTE -->
+    
+    <!-- Lista de presentes fictícios -->
+    
+    
+    <!-- Começo da lista -->
+    
+    <!-- Abaixo 300 presentes com imagens únicas e preços variados -->
+    
+    
+    <!-- Gerado com JavaScript -->
+  </div>
+
+  <script>
+    const container = document.querySelector('.presentes');
+    const nomesPresentes = [
+      "Conjunto de Toalhas", "Faqueiro Inox", "Batedeira Planetária", "Jogo de Cama Queen", "Liquidificador", "Ventilador", "Jogo de Panelas", "Aparelho de Jantar", "Cafeteira Elétrica", "Torradeira", "Churrasqueira Elétrica", "Ferro de Passar", "Aspirador de Pó", "Cesta de Café Romântica", "Kit Banheiro", "Caixa de Ferramentas", "Frigideira Antiaderente", "Bandeja de Servir", "Jogo de Taças", "Abajur Moderno",
+      "Ar Condicionado Split", "Televisor Smart 50\"", "Notebook Básico", "Máquina de Lavar", "Forno Elétrico", "Micro-ondas", "Purificador de Água", "Mesa de Jantar", "Poltrona Decorativa", "Cadeira Gamer"
+    ];
+
+    for (let i = 1; i <= 300; i++) {
+      const nome = nomesPresentes[i % nomesPresentes.length] + " " + i;
+      const preco = (Math.random() * (3000 - 70) + 70).toFixed(2).replace('.', ',');
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML = `
+        <img src="https://source.unsplash.com/200x150/?gift,${i}" alt="Presente ${i}">
+        <h3>${nome}</h3>
+        <p>R$ ${preco}</p>
+        <a href="#" onclick="copiarPIX()">Presentear</a>
+      `;
+      container.appendChild(div);
+    }
+
+    function copiarPIX() {
+      const chave = '45769906839';
+      navigator.clipboard.writeText(chave)
+        .then(() => alert('Chave PIX copiada: ' + chave))
+        .catch(() => alert('Erro ao copiar a chave PIX.'));
+    }
+  </script>
+</body>
+</html>
